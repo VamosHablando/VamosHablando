@@ -24,8 +24,14 @@ body.quiz-page {
     vertical-align: middle;
 }
 
+/* ============================================================
+   MOBILE-FIRST DESIGN SYSTEM
+   Base styles are for mobile (320px+), enhanced via breakpoints
+   ============================================================ */
+
 /* VARIABLES: design tokens (colors, fonts, transitions) */
 :root {
+    /* Brand Colors - per AGENTS.md */
     --color-soft-cream: #F6E6C8;
     --color-dark-emerald: #0B5F58;
     --color-deep-navy: #0E1A2B;
@@ -33,37 +39,79 @@ body.quiz-page {
     --background: var(--color-soft-cream);
     --foreground: var(--color-deep-navy);
     --font-sans: 'Montserrat', sans-serif;
-    --transition-speed: 0.5s;
+    --transition-speed: 0.3s;
 
-    /* Typography sizes (standardized) */
-    --font-size-heading: 2.25rem;
-    /* main H1 */
-    --font-size-subheading: 1.25rem;
-    /* H2/H3 */
-    --font-size-lead: 1.125rem;
-    /* intro text */
-    --font-size-body: 1rem;
-    /* base body text */
-    --font-size-small: 0.875rem;
-    /* captions, hints */
+    /* MOBILE-FIRST Typography - Fluid scaling using clamp() */
+    --font-size-heading: clamp(1.75rem, 5vw, 3.5rem);
+    --font-size-subheading: clamp(1.1rem, 2.5vw, 1.75rem);
+    --font-size-lead: clamp(1rem, 1.5vw, 1.35rem);
+    --font-size-body: clamp(0.9375rem, 1vw, 1rem);
+    --font-size-small: clamp(0.8125rem, 0.9vw, 0.875rem);
 
-    /* Global layout tokens for consistent gutters and section spacing */
-    --page-gutter: 1.5rem;
-    /* horizontal side padding (mobile default) */
-    --section-vertical: 6rem;
-    /* vertical padding for sections (mobile default) */
-    --navbar-padding-x: 1rem;
-    /* internal horizontal padding for the navbar pill */
+    /* MOBILE-FIRST Layout tokens */
+    --page-gutter: 1.25rem;
+    --section-vertical: 2.5rem;
+    --navbar-padding-x: 0.75rem;
     --content-max-width: 56rem;
-    /* Standardized box padding for card-like components */
-    --box-padding: 2.5rem;
-    --box-padding-lg: 2.5rem;
-    /* aligns with .max-w-4xl used in body */
+    
+    /* MOBILE-FIRST Box/Card padding */
+    --box-padding: 1.25rem;
+    --box-padding-lg: 1.5rem;
+    
+    /* Spacing rhythm scale (mobile base) */
+    --space-xs: 0.5rem;
+    --space-sm: 0.75rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
+    --space-3xl: 4rem;
+    
+    /* Tap target minimum (44px = 2.75rem) */
+    --tap-target-min: 2.75rem;
+    
+    /* Line length control */
+    --line-length-min: 45ch;
+    --line-length-max: 75ch;
 }
 
 .dark {
     --background: var(--color-dark-emerald);
     --foreground: var(--color-soft-cream);
+}
+
+/* TABLET breakpoint (768px+) - enhanced spacing */
+@media (min-width: 768px) {
+    :root {
+        --page-gutter: 2.5rem;
+        --section-vertical: 4rem;
+        --navbar-padding-x: 1rem;
+        --box-padding: 2rem;
+        --box-padding-lg: 2.5rem;
+        --space-xl: 2.5rem;
+        --space-2xl: 4rem;
+        --space-3xl: 5rem;
+    }
+}
+
+/* DESKTOP breakpoint (1024px+) - maximum comfort */
+@media (min-width: 1024px) {
+    :root {
+        --page-gutter: 4rem;
+        --section-vertical: 5rem;
+        --navbar-padding-x: 1.25rem;
+        --box-padding: 2.5rem;
+        --box-padding-lg: 3rem;
+        --space-2xl: 5rem;
+        --space-3xl: 6rem;
+    }
+}
+
+/* LARGE DESKTOP breakpoint (1280px+) - prevent over-stretching */
+@media (min-width: 1280px) {
+    :root {
+        --page-gutter: 6rem;
+    }
 }
 
 * {
@@ -73,273 +121,181 @@ body.quiz-page {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-tap-highlight-color: transparent;
-    box-shadow: none !important;
 }
 
-/* BASE: body styles, layout and default typography */
+/* BASE: body styles - mobile-first */
 body {
     background-color: var(--background);
     color: var(--foreground);
     font-family: var(--font-sans);
     font-weight: 400;
-    line-height: 1.5;
+    font-size: var(--font-size-body);
+    line-height: 1.6;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
+    /* Prevent horizontal scroll on mobile */
 }
 
 main {
     flex-grow: 1;
-    padding-top: 1rem; /* Significantly reduced top padding for mobile */
+    padding-top: 5rem;
+    /* Clear fixed navbar on mobile */
 }
 
 @media (min-width: 768px) {
     main {
-        padding-top: 8rem; 
+        padding-top: 6.5rem;
     }
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-weight: 600;
+@media (min-width: 1024px) {
+    main {
+        padding-top: 7rem;
+    }
 }
 
-/* Standardized typography sizes */
-body {
-    font-size: var(--font-size-body);
+/* Typography - headings */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
 }
 
 h1 {
     font-size: var(--font-size-heading);
-    line-height: 1.05;
+    line-height: 1.1;
 }
 
 h2 {
     font-size: var(--font-size-subheading);
-    line-height: 1.15;
+    line-height: 1.2;
 }
 
 h3 {
     font-size: var(--font-size-subheading);
+    line-height: 1.3;
 }
 
-/* Utility classes for consistent sizing */
+/* Utility classes for consistent sizing - mobile-first with fluid scaling */
 .text-heading {
-    font-size: var(--font-size-heading) !important;
-    line-height: 1.1 !important;
-    letter-spacing: -0.02em !important;
-    font-weight: 600 !important;
+    font-size: var(--font-size-heading);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    font-weight: 600;
 }
 
 .text-subheading {
-    font-size: var(--font-size-subheading) !important;
-    line-height: 1.3 !important;
-    letter-spacing: -0.01em !important;
-    font-weight: 600 !important;
+    font-size: var(--font-size-subheading);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    font-weight: 600;
 }
 
 .text-body {
-    font-size: var(--font-size-body) !important;
-    line-height: 1.6 !important;
-    font-weight: 400 !important;
+    font-size: var(--font-size-body);
+    line-height: 1.6;
+    font-weight: 400;
 }
 
 .text-small {
-    font-size: var(--font-size-small) !important;
-    line-height: 1.5 !important;
-    font-weight: 400 !important;
+    font-size: var(--font-size-small);
+    line-height: 1.5;
+    font-weight: 400;
 }
 
-/* Responsive scaling for the core types */
-@media (min-width: 768px) {
-    .text-heading {
-        font-size: 3.5rem !important;
-    }
-
-    .text-subheading {
-        font-size: 1.75rem !important;
-    }
-
-    .text-lead {
-        font-size: 1.35rem !important;
-    }
-}
-
-/* Backwards-compatibility: map legacy utility classes to the standardized tokens */
-.text-6xl,
-.text-5xl,
-.text-4xl {
-    font-size: var(--font-size-heading);
-}
-
-.text-3xl,
-.text-2xl {
-    font-size: var(--font-size-subheading);
-}
-
-.text-xl,
-.text-lg {
-    font-size: var(--font-size-body);
-}
-
-@media (min-width: 768px) {
-
-    .md-text-8xl,
-    .md-text-7xl,
-    .md-text-6xl,
-    .md-text-5xl,
-    .md-text-4xl {
-        font-size: 3.5rem;
-    }
-
-    .md-text-3xl,
-    .md-text-2xl,
-    .md-text-xl {
-        font-size: 1.75rem;
-    }
+/* Text lead - intro paragraphs with optimal line length */
+.text-lead {
+    font-size: var(--font-size-lead);
+    line-height: 1.6;
+    font-weight: 400;
+    max-width: var(--line-length-max);
 }
 
 /* Color utility classes */
-.text-dark-emerald {
-    color: var(--color-dark-emerald) !important;
-}
-
-.text-soft-cream {
-    color: var(--color-soft-cream) !important;
-}
-
-.text-deep-navy {
-    color: var(--color-deep-navy) !important;
-}
-
-.text-light-blue {
-    color: var(--color-light-blue) !important;
-}
+.text-dark-emerald { color: var(--color-dark-emerald); }
+.text-soft-cream { color: var(--color-soft-cream); }
+.text-deep-navy { color: var(--color-deep-navy); }
+.text-light-blue { color: var(--color-light-blue); }
 
 /* Font weight utilities */
-.font-semibold {
-    font-weight: 600 !important;
-}
+.font-semibold { font-weight: 600; }
+.font-medium { font-weight: 500; }
+.font-normal { font-weight: 400; }
 
-.font-medium {
-    font-weight: 500 !important;
-}
+/* Icon size utilities - mobile-first */
+.icon-sm { font-size: 1.25rem; }
+.icon-md { font-size: 1.5rem; }
+.icon-lg { font-size: 1.75rem; }
+.icon-xl { font-size: 2rem; }
+.icon-hero { font-size: 4rem; }
 
-.font-normal {
-    font-weight: 400 !important;
-}
-
-/* Text lead - intro paragraphs */
-.text-lead {
-    font-size: var(--font-size-lead) !important;
-    line-height: 1.6 !important;
-    font-weight: 400 !important;
-}
-
-/* Icon size utilities - standardized */
-.icon-sm {
-    font-size: 1.25rem !important;
-}
-
-.icon-md {
-    font-size: 1.5rem !important;
-}
-
-.icon-lg {
-    font-size: 2rem !important;
-}
-
-.icon-xl {
-    font-size: 2.5rem !important;
-}
-
-.icon-hero {
-    font-size: 6rem !important;
-}
-
-/* Heading icon - consistent size for page titles */
+/* Heading icon - scales with breakpoints */
 .heading-icon {
-    font-size: 2rem !important;
+    font-size: 1.5rem;
     color: var(--color-dark-emerald);
 }
 
 @media (min-width: 768px) {
-    .heading-icon {
-        font-size: 2.5rem !important;
-    }
+    .icon-lg { font-size: 2rem; }
+    .icon-xl { font-size: 2.5rem; }
+    .icon-hero { font-size: 5rem; }
+    .heading-icon { font-size: 2rem; }
+}
 
-    .icon-xl {
-        font-size: 3rem !important;
-    }
+@media (min-width: 1024px) {
+    .icon-xl { font-size: 3rem; }
+    .icon-hero { font-size: 6rem; }
+    .heading-icon { font-size: 2.5rem; }
 }
 
 a {
     text-decoration: none;
     color: inherit;
-    transition: all 0.3s ease;
+    transition: color var(--transition-speed) ease, opacity var(--transition-speed) ease;
 }
 
-/* LAYOUT: section spacing and layout */
+/* ============================================================
+   LAYOUT SYSTEM - Mobile-first sections and containers
+   ============================================================ */
+
+/* Section base - mobile-first with auto height */
 .section {
     padding: var(--section-vertical) var(--page-gutter);
-    min-height: 60vh;
+    min-height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
+/* Only add min-height on larger screens where it makes sense */
 @media (min-width: 768px) {
-
-    /* increase global gutter and vertical spacing on larger screens */
-    :root {
-        --page-gutter: 4rem;
-        --section-vertical: 8rem;
-        --navbar-padding-x: 1.25rem;
+    .section {
+        min-height: 50vh;
     }
 }
 
-@media (min-width: 1024px) {
-
-    /* on very wide screens, give a bit more horizontal breathing room */
-    :root {
-        --page-gutter: 6rem;
-        --section-vertical: 8rem;
-        --navbar-padding-x: 1.5rem;
-    }
-}
-
+/* Container and max-width utilities */
 .section-container {
     max-width: 72rem;
     margin: 0 auto;
     width: 100%;
 }
 
-.max-w-4xl {
-    max-width: 56rem;
+.container {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    width: 100%;
 }
 
-.max-w-5xl {
-    max-width: 64rem;
-}
+.max-w-2xl { max-width: 42rem; }
+.max-w-3xl { max-width: 48rem; }
+.max-w-4xl { max-width: 56rem; }
+.max-w-5xl { max-width: 64rem; }
+.mx-auto { margin-left: auto; margin-right: auto; }
 
-.max-w-2xl {
-    max-width: 42rem;
-}
-
-.max-w-3xl {
-    max-width: 48rem;
-}
-
-.mx-auto {
-    margin-left: auto;
-    margin-right: auto;
-}
-
+/* Section color variants */
 .section-beige {
     background-color: var(--color-soft-cream);
     color: var(--color-deep-navy);
@@ -349,62 +305,75 @@ a {
     background-color: var(--color-dark-emerald);
     color: var(--color-soft-cream);
     min-height: auto;
-    padding-top: 1.75rem;
-    /* reduced vertical padding */
-    padding-bottom: 1.75rem;
+    padding-top: var(--space-lg);
+    padding-bottom: var(--space-lg);
 }
 
-/* Allow making the whole green section full-bleed when needed (adds full-viewport width breakout) */
+@media (min-width: 768px) {
+    .section-green {
+        padding-top: var(--space-xl);
+        padding-bottom: var(--space-xl);
+    }
+}
+
+/* Section-compact: reduced vertical padding for CTA-like sections */
+.section-compact {
+    min-height: auto;
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-xl);
+}
+
+@media (min-width: 768px) {
+    .section-compact {
+        padding-top: var(--space-2xl);
+        padding-bottom: var(--space-2xl);
+    }
+}
+
+/* Full-bleed section variant */
 .section-green.full-bleed {
     width: 100vw;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: var(--page-gutter);
+    padding-right: var(--page-gutter);
 }
 
-@media (min-width: 768px) {
+/* Accent color helpers */
+.accent { color: inherit; }
+.section-beige .accent { color: var(--color-dark-emerald); }
+.section-green .accent { color: var(--color-light-blue); }
 
-    /* A bit more vertical spacing on larger screens */
-    .section-green {
-        padding-top: 3rem;
-        /* slightly larger on tablet/desktop */
-        padding-bottom: 3rem;
-    }
-
-    /* Reduce horizontal gap between text and flag specifically for the green intro */
-    .section-green .section-container {
-        gap: 0.5rem;
-        /* tightened to bring the flag much closer to the text */
-    }
-}
-
-.accent {
-    color: inherit;
-}
-
-.section-beige .accent {
-    color: var(--color-dark-emerald);
-}
-
-.section-green .accent {
-    color: var(--color-light-blue);
-}
+/* ============================================================
+   BUTTON SYSTEM - Mobile-first with proper tap targets
+   ============================================================ */
 
 .button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 1.125rem 2.25rem;
+    /* Mobile: comfortable tap target (44px min height) */
+    min-height: var(--tap-target-min);
+    padding: 0.875rem 1.5rem;
     border-radius: 9999px;
     font-weight: 600;
-    font-size: var(--font-size-subheading);
-    transition: all 0.3s ease;
-    gap: 0.75rem;
-    /* Prevent the label from breaking onto two lines */
+    font-size: var(--font-size-body);
+    line-height: 1.2;
+    transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
+    gap: 0.5rem;
     white-space: nowrap;
-    /* Ensure a sensible minimum width so short labels don't collapse */
-    min-width: 8.5rem;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/* Scale up on tablet+ */
+@media (min-width: 768px) {
+    .button {
+        padding: 1rem 2rem;
+        font-size: var(--font-size-subheading);
+        gap: 0.75rem;
+    }
 }
 
 .button-primary {
@@ -419,46 +388,14 @@ a {
 
 .button-primary:hover {
     opacity: 0.9;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
 }
 
-/* Beige button for dark backgrounds */
-.button-greenback {
-    background-color: var(--color-soft-cream);
-    color: var(--color-dark-emerald);
-}
-
-.button-greenback:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
-}
-
-.button-small {
-    padding: 0.6rem 1.2rem;
-    font-size: 0.9rem;
-    border-radius: 9999px;
-}
-
-/* Prevent button overflow on very small screens - keep labels on one line */
-@media (max-width: 420px) {
-    .button {
-        padding: 0.7rem 1rem;
-        font-size: var(--font-size-body);
-        min-width: 6.5rem;
-    }
-}
-
-/* Add spacing around buttons inside cards (e.g., Aanbod page) */
-.card .button {
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-}
-
-/* Utility: outline button variant for secondary actions */
+/* Outline button variant */
 .button-outline {
+    background: transparent;
     border: 2px solid var(--color-dark-emerald);
     color: var(--color-dark-emerald);
-    background: transparent;
 }
 
 .section-green .button-outline {
@@ -466,42 +403,47 @@ a {
     color: var(--color-soft-cream);
 }
 
-/* Beige outline button variant for dark backgrounds */
-.button-outline.button-beige {
-    background-color: var(--color-soft-cream);
-    color: var(--color-dark-emerald);
-    border-color: var(--color-dark-emerald);
+.button-outline:hover {
+    opacity: 0.85;
+    transform: translateY(-2px);
 }
 
-.button-outline:hover {
-    opacity: 0.95;
-    transform: translateY(-1px);
+/* Smaller button variant */
+.button-small {
+    min-height: 2.25rem;
+    padding: 0.5rem 1rem;
+    font-size: var(--font-size-small);
+}
+
+/* Button icons */
+.button .material-symbols-rounded {
+    font-size: 1.25rem;
+    line-height: 1;
+}
+
+/* Card button spacing */
+.card .button {
+    margin-top: var(--space-md);
 }
 
 /* Icon utilities */
 .icon-card {
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: var(--color-dark-emerald);
     display: block;
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--space-md);
 }
 
 @media (min-width: 768px) {
     .icon-card {
-        font-size: 3rem;
+        font-size: 2.5rem;
+        margin-bottom: var(--space-lg);
     }
 }
 
-/* Button icons: size and alignment consistency */
-.button .material-symbols-rounded {
-    font-size: 1.25rem;
-    line-height: 1;
-    display: inline-block;
-    vertical-align: middle;
-}
-
-/* Ensure material icons are vertically centered when used inline inside cards */
-.card .material-symbols-rounded {
+/* Ensure material icons are vertically centered */
+.card .material-symbols-rounded,
+.inline-icon .material-symbols-rounded {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -520,41 +462,66 @@ a {
 }
 
 /* Accent and pricing helpers */
-.text-accent {
-    color: var(--color-light-blue);
-}
+.text-accent { color: var(--color-light-blue); }
+.price-amount { color: var(--color-soft-cream); font-weight: 600; }
+.no-list { list-style: none; padding: 0; margin: 0; }
+.text-center { text-align: center; }
 
-.price-amount {
-    color: var(--color-soft-cream);
-    font-weight: 600;
-}
+/* ============================================================
+   GRID SYSTEM - Mobile-first responsive grids
+   ============================================================ */
 
-.no-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-/* Small helpers */
-.text-center {
-    text-align: center;
-}
-
-/* Simple grid helpers used throughout HTML */
 .grid {
     display: grid;
-    /* ensure items stretch to equal heights so cards line up neatly */
     align-items: stretch;
+    gap: var(--space-md);
 }
 
-.gap-8 {
-    gap: 2rem;
+/* Mobile: single column by default */
+.grid-2,
+.grid-3 {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: 1fr;
 }
 
-.gap-10 {
-    gap: 2.5rem;
+/* Tablet: 2 columns */
+@media (min-width: 640px) {
+    .grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-lg);
+    }
 }
 
+/* Tablet+: 2 columns for medium grids, 3 for larger */
+@media (min-width: 768px) {
+    .grid-2 {
+        gap: var(--space-xl);
+    }
+    
+    .grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-lg);
+    }
+}
+
+/* Desktop: 3 columns for grid-3 */
+@media (min-width: 1024px) {
+    .grid-3 {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-xl);
+    }
+}
+
+/* Gap utilities */
+.gap-4 { gap: var(--space-md); }
+.gap-6 { gap: var(--space-lg); }
+.gap-8 { gap: var(--space-xl); }
+.gap-10 { gap: var(--space-2xl); }
+.gap-12 { gap: var(--space-2xl); }
+.gap-16 { gap: var(--space-3xl); }
+
+/* Responsive grid utilities */
 @media (min-width: 768px) {
     .md-grid-cols-2 {
         grid-template-columns: repeat(2, 1fr);
@@ -564,71 +531,43 @@ a {
         grid-template-columns: repeat(3, 1fr);
     }
 
-    /* Utility: allow grid items to span both columns on medium+ screens */
     .md-col-span-2 {
         grid-column: 1 / -1;
     }
-
-    /* Responsive flex utilities */
-    .md-flex {
-        display: flex;
-    }
-
-    .md-flex-row {
-        flex-direction: row;
-    }
-
-    .md-items-start {
-        align-items: flex-start;
-    }
-
-    .md-items-center {
-        align-items: center;
-    }
-
-    .md-text-left {
-        text-align: left;
-    }
-
-    .md-w-1-3 {
-        width: 33.333%;
-    }
-
-    .md-gap-12 {
-        gap: 3rem;
-    }
-
-    .md-p-12 {
-        padding: 3rem;
-    }
 }
 
-/* Hide on mobile, show on md+ */
-.hidden {
-    display: none;
+/* Responsive flex utilities */
+@media (min-width: 768px) {
+    .md-flex { display: flex; }
+    .md-flex-row { flex-direction: row; }
+    .md-items-start { align-items: flex-start; }
+    .md-items-center { align-items: center; }
+    .md-text-left { text-align: left; }
+    .md-w-1-3 { width: 33.333%; }
+    .md-gap-12 { gap: var(--space-2xl); }
+    .md-p-12 { padding: var(--space-2xl); }
 }
+
+/* Visibility utilities */
+.hidden { display: none; }
 
 @media (min-width: 768px) {
-    .hidden.md-flex {
-        display: flex;
-    }
-
-    .hidden.md-block {
-        display: block;
-    }
+    .hidden.md-flex { display: flex; }
+    .hidden.md-block { display: block; }
 }
 
+/* Inline link styling */
 .inline-link {
     display: inline-flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.5rem;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: opacity var(--transition-speed) ease;
 }
 
 .inline-link span:not(.material-symbols-rounded) {
     text-decoration: underline;
-    text-underline-offset: 6px;
+    text-underline-offset: 4px;
     text-decoration-thickness: 1.5px;
 }
 
@@ -636,345 +575,129 @@ a {
     opacity: 0.7;
 }
 
-/* CONTACT: spacing for quick contact buttons */
+/* ============================================================
+   CONTACT COMPONENTS
+   ============================================================ */
+
 .contact-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 2.5rem 4rem;
-    /* vertical gap then horizontal gap */
+    gap: var(--space-lg) var(--space-xl);
     align-items: center;
 }
 
+/* Contact grid - mobile-first */
 .contact-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 cols on mobile */
-    gap: 0.75rem;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
     width: 100%;
 }
 
-@media (max-width: 767px) {
-    .contact-grid .contact-card,
-    .contact-grid .card-base {
-        padding: 1rem !important;
-        min-height: 0 !important; /* Remove huge min-height */
-        gap: 1rem;
-    }
-    
-    .contact-grid h3 {
-        font-size: 1rem !important;
-        margin-bottom: 0.25rem !important;
-    }
-    
-    .contact-grid p {
-        font-size: 0.8rem !important;
-        margin-bottom: 0.5rem !important;
-    }
-    
-    .contact-grid svg, .contact-grid .material-symbols-rounded {
-        width: 2rem !important;
-        height: 2rem !important;
-        font-size: 2rem !important;
-        margin-bottom: 0.5rem !important;
-    }
-    
-    .contact-grid .button {
-        width: 100%;
-        padding: 0.5rem !important;
-        font-size: 0.85rem !important;
+@media (min-width: 640px) {
+    .contact-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (min-width: 768px) {
     .contact-grid {
         grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem; /* Restore gap */
+        gap: var(--space-lg);
     }
 }
 
+/* Contact card */
 .contact-card {
-    /* contact card (keeps its layout but visually matches other components) */
     background-color: rgba(11, 95, 88, 0.04);
     padding: var(--box-padding);
-    border-radius: 2rem;
+    border-radius: 1.5rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 200px;
-    gap: 3rem;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    min-height: auto;
+    gap: var(--space-lg);
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
     border: 1px solid rgba(11, 95, 88, 0.06);
-    text-decoration: none !important;
-}
-
-.contact-card:hover {
-    box-shadow: 0 8px 20px rgba(14, 26, 43, 0.06);
-}
-
-/* COMPONENTS: shared base for card-like components */
-.component,
-.card,
-.contact-card,
-.price-card,
-.quiz-step-card,
-.quiz-results-card,
-.card-outline,
-.card-filled {
-    padding: var(--box-padding) !important;
-    border-radius: 2rem !important;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    border: 1px solid rgba(11, 95, 88, 0.08) !important;
-    background-color: rgba(11, 95, 88, 0.04);
-    /* No important here to allow overrides */
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-/* Slightly stronger hover for card-like components */
-.card:hover,
-.contact-card:hover,
-.price-card:hover,
-.card-outline:hover,
-.card-filled:hover {
-    box-shadow: 0 8px 20px rgba(14, 26, 43, 0.06);
-}
-
-.card-scale:hover {
-    transform: scale(1.05);
-}
-
-/* Design-system layout utilities */
-.container {
-    max-width: var(--content-max-width);
-    margin: 0 auto;
-    width: 100%;
-}
-
-.grid-2 {
-    display: grid;
-    gap: 0.75rem; /* Tight gap for mobile */
-    grid-template-columns: repeat(2, 1fr); /* 2 cols on mobile */
-    align-items: stretch;
-}
-
-.grid-3 {
-    display: grid;
-    gap: 2rem;
-    grid-template-columns: 1fr; /* Keep 3-grid as 1 col on mobile? Or 2? Let's stick to user request "most boxes next to each other" but usually 3-grid content is denser. Let's keep 3-grid stacked for now as it might be too small, or make it 2-col? Let's keep 1 col for grid-3 unless requested */
+    text-decoration: none;
 }
 
 @media (min-width: 768px) {
-    .grid-2 {
-        gap: 2rem;
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .grid-3 {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+    .contact-card {
+        border-radius: 2rem;
+        min-height: 200px;
+        gap: var(--space-xl);
     }
 }
 
-/* Mobile optimizations for cards in the dense 2-column grid */
-@media (max-width: 767px) {
-    .grid-2 .card, .grid-2 .card-base {
-        padding: 1rem !important;
-    }
-    
-    .grid-2 h3, .grid-2 .text-subheading {
-        font-size: 1rem !important;
-        margin-bottom: 0.5rem !important; 
-        hyphens: auto;
-    }
-    
-    .grid-2 p, .grid-2 .text-body {
-        font-size: 0.85rem !important;
-        line-height: 1.4 !important;
-    }
-    
-    .grid-2 .material-symbols-rounded, .grid-2 svg, .grid-2 .accent {
-        font-size: 2rem !important; /* Smaller icons */
-        margin-bottom: 0.5rem !important;
-    }
-    
-    .grid-2 .button {
-        padding: 0.6rem 0.5rem !important;
-        width: 100%;
-        font-size: 0.85rem !important;
-    }
+.contact-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(14, 26, 43, 0.06);
 }
 
-/* --- Accordion / Expandable Cards --- */
-.accordion-item {
-    cursor: pointer;
-    overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
+/* ============================================================
+   CARD COMPONENTS - Mobile-first base styling
+   ============================================================ */
 
-.accordion-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-}
-
-/* Groepslessen Specific Layout Fixes */
-
-/* 1. Header Text Stretching (Title and Subtitle horizontal) */
-/* Target the text container (2nd child of the flex container inside header) */
-.accordion-header > div > div:nth-child(2) {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: wrap !important;
-    align-items: baseline !important;
-    gap: 0.5rem !important;
-}
-
-/* Groepslessen Specific Layout Fixes (Laptop & Mobile) */
-/* User Requirement: Text must be long/wide, overlap/run-over the Lees Meer box. */
-/* Updated Requirement: Button is primary and smaller. Extra text (subtitle) UNDER title. */
-
-/* 1. Reset Header Layout for Overlap */
-.accordion-header {
-    display: block !important; /* Allow absolute positioning within relative container */
-    position: relative !important;
-    width: 100%;
-    min-height: 4rem; /* Ensure height for button overlap */
-}
-
-.accordion-header > div {
-    display: block !important;
-    width: 100%;
-}
-
-/* 2. Text Container - Full Width Flow */
-/* Target the div containing H2 and P */
-.accordion-header > div > div:nth-child(2) {
-    display: block !important; /* Back to block to STACK title and subtitle */
-    width: 100% !important;
-    padding-right: 0; /* Let it run behind/under button if needed */
-}
-
-.accordion-header h2 {
-    display: block !important; /* Stack */
-    margin-right: 0 !important;
-    margin-bottom: 0.25rem !important; /* Space between title and subtitle */
-}
-
-.accordion-header p.opacity-60 {
-    display: block !important; /* Stack */
-    margin-bottom: 0 !important;
-}
-
-/* 3. Button - Positioned to intersect/overlap */
-/* Now targeting .button-primary inside header as requested */
-.accordion-header .button-primary {
-    position: absolute !important;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    /* Remove previous outline styles if they conflict, primary has its own */
-    background-color: var(--color-dark-emerald) !important; 
-    color: var(--color-soft-cream) !important;
-    z-index: 10;
-    display: inline-flex !important;
-    align-items: center !important; 
-    gap: 0.5rem !important;
-    /* User said "smaller" */
-    padding: 0.5rem 1rem !important;
-    font-size: 0.9rem !important;
-    border: none !important; /* No outline for primary unless requested, user asked for outline previously on secondary? 
-                              "De lees meer box moet ook een outline hebben." 
-                              Wait, usually primary is filled. 
-                              The user said: "boxes have the primary button ... and smaller. ... De lees meer box moet ook een outline hebben."
-                              So Primary Button + Outline? 
-                              Or just "outline" implies border. Primary implies filled. 
-                              Let's give it a border too just in case or use button-outline style but with primary colors?
-                              I will stick to standard Primary (Filled) but maybe add a white border if it overlaps text? 
-                              Or maybe the user means "Outline Style" but "Primary Color"?
-                              Let's assume Filled Primary Button based on class name, and maybe add a border if explicitly asked "outline" again.
-                              Actually, let's add a border to the primary button to satisfy "outline".
-                           */
-    border: 1px solid var(--color-soft-cream) !important; /* Visible against dark bg, or dark against light? */
-    /* Wait, the background is beige/dark. On beige, primary is dark green. Border should be... dark green? or white? */
-    border: 2px solid rgba(255,255,255,0.2) !important; /* Subtle outline */
-}
-
-/* On mobile, careful with overlap if text is long */
-@media (max-width: 767px) {
-    .accordion-header .button-primary {
-        /* If text is really long, we might need to push it down or let it wrap? 
-           User said "text ... run over the lees meer box" (overheenlopen). 
-           So text BEHIND button.
-        */
-        right: 0; 
-        padding: 0.4rem 0.8rem !important;
-        font-size: 0.8rem !important;
-    }
-}
-
-/* 4. Icon Alignment in Lists (Wat kan je verwachten / Praktisch) */
-.accordion-content ul li {
-    align-items: flex-start !important;
-}
-
-.accordion-content ul li .material-symbols-rounded {
-    margin-top: -2px; 
-    min-width: 1.5rem; /* Ensure icon doesn't shrink */
-}
-
-
-.accordion-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, padding 0.3s ease;
-    opacity: 0;
-}
-
-.accordion-item.active {
-    cursor: default;
-}
-
-.accordion-item.active .accordion-content {
-    max-height: 2000px; /* Large enough for content */
-    opacity: 1;
-    padding-top: 2rem;
-}
-
-.accordion-arrow {
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    user-select: none;
-}
-
-.accordion-item.active .accordion-arrow {
-    transform: rotate(180deg);
-}
-
-/* Hover effect on header when closed */
-.accordion-item:not(.active):hover {
-    background-color: rgba(11, 95, 88, 0.08);
-}
-
-.section-green .accordion-item:not(.active):hover {
-    background-color: rgba(246, 230, 200, 0.12);
-}
-
-/* Design-system card variants */
-.card-base {
+.card,
+.card-base,
+.component {
     padding: var(--box-padding);
-    border-radius: 2rem;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 1rem;
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    border: 1px solid rgba(11, 95, 88, 0.08);
+    background-color: rgba(11, 95, 88, 0.04);
     display: flex;
     flex-direction: column;
     width: 100%;
-    border: 1px solid rgba(11, 95, 88, 0.08);
-    background-color: rgba(11, 95, 88, 0.04);
 }
 
+@media (min-width: 768px) {
+    .card,
+    .card-base,
+    .component {
+        padding: var(--box-padding-lg);
+        border-radius: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .card,
+    .card-base,
+    .component {
+        border-radius: 2rem;
+    }
+}
+
+/* Card variants */
 .card-normal {
     background-color: rgba(11, 95, 88, 0.04);
     border: 1px solid rgba(11, 95, 88, 0.08);
 }
 
+.card-outline {
+    background-color: rgba(246, 230, 200, 0.05);
+    border: 1px solid rgba(11, 95, 88, 0.08);
+}
+
+.card-filled {
+    background-color: var(--color-dark-emerald);
+    color: var(--color-soft-cream);
+    border-color: rgba(246, 230, 200, 0.1);
+}
+
+/* Card hover states */
+.card:hover,
+.card-base:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(14, 26, 43, 0.06);
+}
+
+.card-scale:hover {
+    transform: scale(1.02);
+}
+
+/* Section-specific card theming */
 .section-green .card-normal {
     background-color: rgba(246, 230, 200, 0.06);
     border: 1px solid rgba(246, 230, 200, 0.1);
@@ -982,12 +705,110 @@ a {
 }
 
 .section-green .card-filled {
-    background-color: var(--color-soft-cream) !important;
-    color: var(--color-dark-emerald) !important;
-    border-color: rgba(11, 95, 88, 0.12) !important;
+    background-color: var(--color-soft-cream);
+    color: var(--color-dark-emerald);
+    border-color: rgba(11, 95, 88, 0.12);
 }
 
-/* Taalreizen page */
+.section-beige .card,
+.section-beige .card-outline {
+    background-color: rgba(11, 95, 88, 0.04);
+    border: 1px solid rgba(11, 95, 88, 0.06);
+}
+
+/* ============================================================
+   ACCORDION / EXPANDABLE CARDS
+   ============================================================ */
+
+.accordion-item {
+    cursor: pointer;
+    overflow: hidden;
+    transition: background-color var(--transition-speed) ease;
+}
+
+.accordion-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    position: relative;
+    min-height: 3rem;
+    padding-right: 5.5rem;
+}
+
+.accordion-header h2 {
+    margin-bottom: var(--space-xs);
+}
+
+.accordion-header .button {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0.5rem 0.75rem;
+    font-size: var(--font-size-small);
+    min-height: 2rem;
+}
+
+@media (min-width: 768px) {
+    .accordion-header {
+        padding-right: 8rem;
+    }
+    
+    .accordion-header .button {
+        padding: 0.5rem 1rem;
+    }
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, opacity var(--transition-speed) ease, padding var(--transition-speed) ease;
+    opacity: 0;
+}
+
+.accordion-content ul li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+}
+
+.accordion-content ul li .material-symbols-rounded {
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+}
+
+.accordion-item.active {
+    cursor: default;
+}
+
+.accordion-item.active .accordion-content {
+    max-height: 2000px;
+    opacity: 1;
+    padding-top: var(--space-lg);
+}
+
+.accordion-arrow {
+    transition: transform 0.4s ease;
+    user-select: none;
+}
+
+.accordion-item.active .accordion-arrow {
+    transform: rotate(180deg);
+}
+
+.accordion-item:not(.active):hover {
+    background-color: rgba(11, 95, 88, 0.06);
+}
+
+.section-green .accordion-item:not(.active):hover {
+    background-color: rgba(246, 230, 200, 0.1);
+}
+
+/* ============================================================
+   TAALREIZEN PAGE - Mobile-first image layouts
+   ============================================================ */
+
 .taalreis-hero-media {
     align-items: center;
     justify-content: center;
@@ -995,164 +816,157 @@ a {
 
 .taalreis-hero-grid {
     display: grid;
-    gap: 2rem;
+    gap: var(--space-lg);
     grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+    .taalreis-hero-grid {
+        grid-template-columns: 0.8fr 1.2fr;
+        align-items: center;
+        gap: var(--space-xl);
+    }
+    
+    .taalreis-hero-media {
+        order: 2;
+    }
 }
 
 .taalreis-hero-image {
     width: 100%;
-    max-width: 760px; /* larger hero image */
+    max-width: 100%;
     height: auto;
-    object-fit: contain;
+    object-fit: cover;
     border-radius: 0.75rem;
-    box-shadow: 0 12px 30px rgba(14,26,43,0.08);
-    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    box-shadow: 0 8px 20px rgba(14, 26, 43, 0.08);
+    transition: transform var(--transition-speed) ease;
+}
+
+@media (min-width: 768px) {
+    .taalreis-hero-image {
+        max-width: 760px;
+    }
 }
 
 .taalreis-list {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: var(--space-sm);
     padding-left: 0;
 }
 
 .taalreis-list-item {
     display: flex;
-    gap: 0.75rem;
+    gap: var(--space-sm);
     align-items: flex-start;
 }
 
 .taalreis-day-list {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: var(--space-lg);
 }
 
 .taalreis-day-card {
     display: grid;
-    gap: 1.25rem;
+    gap: var(--space-md);
     align-items: center;
-    padding: 1.75rem;
+    padding: var(--box-padding);
 }
 
 .taalreis-day-photos {
     display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+    grid-template-columns: 1fr;
 }
 
 .taalreis-day-photo {
     width: 100%;
     aspect-ratio: 16 / 9;
-    border-radius: 1.25rem;
+    border-radius: 1rem;
     object-fit: cover;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform var(--transition-speed) ease;
 }
 
 .taalreis-day-photo:hover,
 .taalreis-day-photo:focus-visible {
-    transform: scale(1.06);
-    box-shadow: 0 12px 24px rgba(14, 26, 43, 0.12);
+    transform: scale(1.03);
 }
 
 @media (min-width: 768px) {
-    .taalreis-hero-grid {
-        grid-template-columns: 0.8fr 1.2fr; /* give media column more space */
-        align-items: center;
-    }
-    
-    /* Restore visual order: Text (default order 0) Left, Media Right */
-    .taalreis-hero-media {
-        order: 2;
-    }
-
     .taalreis-day-card {
         grid-template-columns: 1.35fr 0.65fr;
+        padding: var(--box-padding-lg);
     }
 
     .taalreis-day-photos {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .taalreis-day-photo {
+        border-radius: 1.25rem;
     }
 }
 
+/* ============================================================
+   CONTACT COMPONENTS
+   ============================================================ */
+
 .contact-icon {
-    font-size: 2.5rem !important;
+    font-size: 2rem;
     color: var(--color-dark-emerald);
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--space-md);
 }
 
 @media (min-width: 768px) {
     .contact-icon {
-        font-size: 3rem !important;
+        font-size: 2.5rem;
+        margin-bottom: var(--space-lg);
     }
 }
 
 .contact-content {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: var(--space-xs);
 }
 
 .contact-label {
-    font-size: 1.25rem;
+    font-size: var(--font-size-subheading);
     font-weight: 600;
     color: var(--color-dark-emerald);
 }
 
-@media (min-width: 768px) {
-    .contact-label {
-        font-size: 1.5rem;
-    }
-}
-
 .contact-value {
-    font-size: 1rem;
+    font-size: var(--font-size-body);
     opacity: 0.7;
     font-weight: 400;
 }
 
-/* Email capture box — uses site-wide box padding for consistency */
+/* Email capture box */
 .email-capture {
-    margin: 2rem 0;
+    margin: var(--space-lg) 0;
     padding: var(--box-padding);
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 1rem;
 }
 
-@media (min-width: 768px) {
-    .card {
-        padding: var(--box-padding-lg);
-    }
-
-    /* Make the wider card span the full grid width — keep inner content stacked so icon sits above text */
-    .card-wide {
-        width: 100%;
-    }
-
-    .card-wide-inner {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        align-items: flex-start;
-    }
-
-    /* Ensure icons inside cards behave like the other (stacked) cards: block with bottom spacing */
-    .card .material-symbols-rounded,
-    .card-wide .material-symbols-rounded {
-        display: block;
-        margin-bottom: 1rem;
-        color: var(--color-dark-emerald);
-    }
+/* Card wide layout */
+.card-wide {
+    width: 100%;
 }
 
-/* On small screens, stack the wide card's inner content vertically */
-@media (max-width: 767px) {
-    .card-wide-inner {
-        flex-direction: column;
-        gap: 1rem;
-    }
+.card-wide-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    align-items: flex-start;
 }
+
+/* ============================================================
+   PRICE CARDS
+   ============================================================ */
 
 .price-card {
     text-align: center;
@@ -1160,23 +974,21 @@ a {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
-    min-height: 220px;
+    gap: var(--space-sm);
+    min-height: 180px;
     border: 1px solid rgba(14, 26, 43, 0.06);
-    box-shadow: 0 8px 20px rgba(14, 26, 43, 0.04);
     background-color: rgba(11, 95, 88, 0.04);
     color: var(--color-deep-navy);
 }
 
 @media (min-width: 768px) {
     .price-card {
-        min-height: 260px;
+        min-height: 220px;
     }
 }
 
-/* Invert visuals based on surrounding section (match secondary boxes behaviour, inverted) */
+/* Section-specific price card themes */
 .section-green .price-card {
-    /* 90% green + 10% beige (slightly lighter than background) */
     background-color: #236D63;
     /* mix of 90% #0B5F58 + 10% #F6E6C8 */
     color: var(--color-soft-cream);
@@ -1241,49 +1053,50 @@ a {
 }
 
 .section-beige .card-outline {
-    /* keep a light outline variant if needed */
     background-color: rgba(11, 95, 88, 0.03);
 }
 
+/* ============================================================
+   RESPONSIVE IMAGES
+   ============================================================ */
+
+/* Base image behavior - prevent overflow */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Profile/Docent photos - mobile-first */
 .docent-photo {
     width: 100%;
-    max-width: 240px;
+    max-width: 100%;
     border-radius: 1rem;
     object-fit: cover;
-    box-shadow: 0 10px 30px rgba(14, 26, 43, 0.08);
+    box-shadow: 0 8px 20px rgba(14, 26, 43, 0.06);
 }
 
 .docent-photo-hero {
-    max-width: 320px;
     border-radius: 1rem;
 }
 
-/* Spanish flag removed — flag styles cleaned up */
+.profile-photo {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
 
-@media (max-width: 767px) {
-    /* Spanish flag removed — mobile flag styles cleaned up */
-
-    /* On mobile, make the docent image fill the available content width (respects section padding)
-       and remove the max-width constraint so the photo is full-bleed within the section. */
-    .profile-photo {
-        display: flex;
-        justify-content: center;
-        width: 100%;
+@media (min-width: 768px) {
+    .docent-photo {
+        max-width: 280px;
     }
 
-    .docent-photo {
-        max-width: none;
-        width: 100%;
-        border-radius: 1rem;
-        object-fit: cover;
+    .docent-photo-hero {
+        max-width: 360px;
     }
 }
 
 @media (min-width: 1024px) {
-    /* No flag styles needed here after removal */
-}
-
-@media (min-width: 768px) {
     .docent-photo {
         max-width: 300px;
     }
@@ -1293,38 +1106,46 @@ a {
     }
 }
 
-/* NAVBAR: fixed header styles and responsive behavior */
+/* ============================================================
+   NAVBAR - Mobile-first fixed header
+   ============================================================ */
+
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 50;
-    transition: all var(--transition-speed) ease;
-    padding: 1.5rem calc(var(--page-gutter) - var(--navbar-padding-x));
-    -webkit-transform: translate3d(0, 0, 0);
-    /* Fix for iOS fixed element rendering */
-    transform: translate3d(0, 0, 0);
+    transition: padding var(--transition-speed) ease;
+    padding: 0.75rem var(--page-gutter);
+    transform: translate3d(0, 0, 0); /* iOS fix */
 }
 
 @media (min-width: 768px) {
     .navbar {
-        padding: 2rem calc(var(--page-gutter) - var(--navbar-padding-x));
+        padding: 1rem var(--page-gutter);
+    }
+}
+
+@media (min-width: 1024px) {
+    .navbar {
+        padding: 1.25rem var(--page-gutter);
     }
 }
 
 .navbar.scrolled {
-    padding: 0.75rem calc(var(--page-gutter) - var(--navbar-padding-x));
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
 }
 
 .navbar-container {
-    max-width: calc(var(--content-max-width) + (2 * var(--navbar-padding-x)));
+    max-width: calc(var(--content-max-width) + 2rem);
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    transition: all var(--transition-speed) ease;
-    padding: 0.75rem var(--navbar-padding-x);
+    transition: background-color var(--transition-speed) ease, border-radius var(--transition-speed) ease;
+    padding: 0.5rem var(--navbar-padding-x);
 }
 
 .navbar.scrolled .navbar-container {
@@ -1332,10 +1153,9 @@ a {
     backdrop-filter: blur(12px);
     border: 1px solid rgba(11, 95, 88, 0.08);
     border-radius: 9999px;
-    padding-left: var(--navbar-padding-x);
-    padding-right: var(--navbar-padding-x);
 }
 
+/* Logo */
 .logo {
     font-size: 1.25rem;
     font-weight: 600;
@@ -1346,45 +1166,29 @@ a {
 .logo-link {
     display: inline-flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.5rem;
 }
 
 .logo-image {
     display: inline-block;
-    height: 40px;
+    height: 36px;
     width: auto;
 }
 
-@media (min-width: 820px) {
-    .logo {
-        font-size: 1.5rem;
-    }
+/* Logo variants for screen sizes */
+.logo-desktop { display: none; }
+.logo-mobile { display: inline-block; }
 
-    .logo-desktop {
-        display: inline-block;
-    }
-
-    .logo-mobile {
-        display: none;
-    }
-
-    .logo-image {
-        height: 48px;
-    }
-}
-
-@media (max-width: 819px) {
-    .logo-desktop {
-        display: none;
-    }
-
-    .logo-mobile {
-        display: inline-block;
-    }
-
+@media (min-width: 768px) {
     .logo-image {
         height: 40px;
     }
+}
+
+@media (min-width: 820px) {
+    .logo-desktop { display: inline-block; }
+    .logo-mobile { display: none; }
+    .logo-image { height: 48px; }
 }
 
 .nav-links {
@@ -2736,412 +2540,220 @@ body.quiz-page+footer {
     color: var(--color-soft-cream);
 }
 
-/* ==========================================
-   MOBILE RESPONSIVE POLISH (0–767px)
-   ========================================== */
+/* ============================================================
+   RESPONSIVE ENHANCEMENTS
+   Mobile-first base styles are above; these are refinements
+   ============================================================ */
 
-/* Section-compact: reduced vertical padding for CTA-like end sections */
-.section-compact {
-    min-height: auto;
-    padding-top: 3rem;
-    padding-bottom: 3rem;
+/* Hero section - mobile optimizations */
+.hero-home {
+    min-height: 85lvh; /* Slightly less stretched than 100lvh */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-2xl);
 }
 
-@media (max-width: 767px) {
-
-    /* --- Global spacing reductions --- */
-    :root {
-        --section-vertical: 3.5rem;
-        --box-padding: 1.5rem;
-        --box-padding-lg: 1.5rem;
+@media (max-width: 639px) {
+    .hero-home .text-heading {
+        font-size: clamp(2.25rem, 8vw, 3rem) !important;
+        margin-bottom: var(--space-lg) !important;
     }
 
-    /* Reduce section min-height so short-content sections don't have awkward whitespace */
-    .section {
-        min-height: auto;
+    .hero-home .text-body {
+        font-size: 1.2rem !important;
+        line-height: 1.5;
+        margin-bottom: var(--space-xl) !important;
     }
+}
 
-    .section-compact {
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-    }
-
-    /* --- Typography mobile scaling --- */
-    h1 {
-        font-size: 1.75rem;
-    }
-
-    h2 {
-        font-size: 1.15rem;
-    }
-
-    .text-heading {
-        font-size: 1.75rem !important;
-    }
-
-    .text-subheading {
-        font-size: 1.15rem !important;
-    }
-
-    .text-lead {
-        font-size: 1rem !important;
-    }
-
-    /* --- Heading + icon layout --- */
-    .text-heading.flex.items-center.gap-6,
-    h1.flex.items-center.gap-6,
-    h2.flex.items-center.gap-6 {
-        gap: 0.75rem !important;
-    }
-
-    .heading-icon {
-        font-size: 1.5rem !important;
-    }
-
-    /* --- Space-y reductions on mobile --- */
-    .space-y-16 > * + * {
-        margin-top: 2.5rem;
-    }
-
-    .space-y-12 > * + * {
-        margin-top: 2rem;
-    }
-
-    .space-y-10 > * + * {
-        margin-top: 1.75rem;
-    }
-
-    /* --- Card mobile padding --- */
-    .card,
-    .card-base,
-    .card-outline,
-    .card-filled,
-    .contact-card {
-        padding: 1.5rem !important;
-    }
-
-    .card-base.card-filled {
-        padding: 1.5rem !important;
-    }
-
-    /* --- Button mobile refinement --- */
-    .button {
-        padding: 0.85rem 1.5rem;
-        font-size: 0.95rem;
-    }
-
-    .button-small {
-        padding: 0.5rem 1rem;
-        font-size: 0.85rem;
-    }
-
-    /* --- Grid-2 collapses to single column --- */
-    .grid-2,
-    .grid-2x3 {
-        grid-template-columns: 1fr;
-    }
-
-/* Mobile Footer Optimization */
-@media (max-width: 767px) {
-    /* --- Main Layout Fixes --- */
-    main {
-        /* Header must not block text. Assuming ~80px fixed header. */
-        padding-top: 5rem !important; 
-    }
-
-    /* Prevent horizontal overflow globally */
-    body, .section-container, .container {
-        max-width: 100vw;
-        overflow-x: hidden;
-    }
-
-    /* Home Hero */
+@media (min-width: 768px) {
     .hero-home {
-        min-height: auto !important;
-        padding-top: 2rem !important;
-        padding-bottom: 2rem !important;
-    }
-
-    /* --- Footer --- */
-    .footer-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr; /* Main sections horizontal */
-        gap: 1.5rem;
-    }
-
-    .footer-container > :first-child {
-        grid-column: 1 / -1; /* Logo/Text full width on top */
-        margin-bottom: 1rem;
-        padding-bottom: 1.5rem;
-        border-bottom: 1px solid rgba(246, 230, 200, 0.1);
-        text-align: center;
-    }
-
-    .footer-list {
-        display: flex;
-        flex-direction: column !important; /* Sub-elements vertical */
-        gap: 0.75rem;
-    }
-
-    .footer-column h4 {
-        margin-bottom: 0.75rem;
-        font-size: 1rem; 
-    }
-
-    .footer-bottom {
-        margin-top: 3rem;
-        padding-top: 2rem;
-    }
-
-    /* --- Contact grid mobile --- */
-    .contact-grid {
-        display: grid !important;
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 0.75rem !important;
-    }
-
-    /* --- Price card mobile --- */
-    .price-card {
-        min-height: 180px;
-    }
-
-    /* --- Taalreis mobile --- */
-    .taalreis-hero-grid {
-        display: block !important; /* Block for float support */
-    }
-
-    .taalreis-hero-media {
-        float: right !important; /* Float Right */
-        width: 45% !important;
-        margin-left: 1.5rem !important;
-        margin-bottom: 0.5rem !important;
-        /* Ensure it clears or interacts properly */
-    }
-    
-    .taalreis-hero-image {
-        width: 100% !important;
-        max-width: 100% !important;
-        height: auto !important;
-        border-radius: 0.75rem !important;
-    }
-
-    .taalreis-day-card {
-        display: grid !important;
-        grid-template-columns: 1.1fr 0.9fr !important; /* Slightly more room for text */
-        align-items: stretch !important; /* Make image fill box height */
-        padding: 0 !important; /* Remove padding to let image reach edges */
-        gap: 0 !important;
-        min-height: 180px;
-        overflow: hidden; /* Keep border radius clean */
-    }
-
-    .taalreis-day-content {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 1rem;
-    }
-
-    .taalreis-day-photos {
-        grid-template-columns: 1fr !important; /* Stack photos inside the small column */
-        height: 100%;
-        gap: 0 !important;
-    }
-
-    .taalreis-day-photo {
-        height: 100% !important;
-        width: 100% !important;
-        aspect-ratio: auto !important; /* Allow it to stretch */
-        border-radius: 0 !important; /* Image fills the right half completely */
-        object-fit: cover !important;
-    }
-
-    /* --- Profile hero mobile --- */
-    /* Layout: Image floated left (50% w), Text wraps around it */
-    .profile-hero {
-        display: block !important;
-        width: 100% !important;
-    }
-
-    .profile-photo {
-        display: block !important;
-        float: left !important;
-        width: 50% !important; /* Exactly half width */
-        margin-right: 1rem !important;
-        margin-bottom: 0.5rem !important;
-        padding: 0 !important; /* Ensure no padding steals space */
-    }
-    
-    .docent-photo-hero {
-        width: 100% !important;
-        max-width: 100% !important; /* Override desktop max-width */
-        height: auto !important;
-        border-radius: 0.75rem !important;
-    }
-
-    .intro-text {
-        font-size: 1rem !important;
-        line-height: 1.6 !important;
-        display: block !important; 
-        /* Block display ensures text flows around the float */
-    }
-    
-    /* Ensure the icon flows with the text or sits nicely */
-    .intro-text .material-symbols-rounded {
-        display: none !important; /* Optional: Hide the icon to save space/clean layout on mobile? 
-                                     Or keep it. User didn't ask to remove. 
-                                     But an icon block might break the flow if it's width:100% */
-    }
-    
-    /* If we keep the icon, ensure it doesn't clear */
-    /* Actually, the icon has 'mb-4' and is a span. likely inline-block. */
-
-
-    /* --- Hero section mobile --- */
-    .hero-wrapper {
         min-height: 70vh;
+        padding-top: var(--space-2xl);
+        padding-bottom: var(--space-2xl);
+    }
+}
+
+.hero-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: auto;
+    text-align: center;
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .hero-wrapper {
+        min-height: 60vh;
+    }
+}
+
+.hero-title {
+    font-size: var(--font-size-heading);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-md);
+}
+
+.hero-subtitle {
+    font-size: var(--font-size-lead);
+    max-width: 40ch;
+    margin-bottom: var(--space-lg);
+    opacity: 0.8;
+}
+
+/* Profile hero layout - mobile-first */
+.profile-hero {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .profile-hero {
+        flex-direction: row;
+        gap: var(--space-xl);
+        align-items: flex-start;
+    }
+}
+
+/* Intro text styling */
+.intro-text {
+    font-size: var(--font-size-body);
+    line-height: 1.6;
+}
+
+/* Footer - mobile-first */
+.footer-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+}
+
+.footer-container > :first-child {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid rgba(246, 230, 200, 0.1);
+}
+
+@media (max-width: 639px) {
+    /* Square accordion button on mobile */
+    .accordion-header .button-small {
+        width: 44px;
+        height: 44px;
+        padding: 0 !important;
+        display: inline-flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        min-width: 44px !important;
+        border-radius: 8px !important;
+        flex-shrink: 0;
     }
 
-    .hero-title {
-        font-size: 1.75rem !important;
-    }
-
-    .hero-subtitle {
-        font-size: 1rem !important;
-    }
-
-    /* --- Gap reductions --- */
-    .gap-8, .gap-10 {
-        gap: 1.5rem !important;
-    }
-
-    .gap-12, .gap-16 {
-        gap: 2rem !important;
-    }
-
-    /* --- Icon sizing mobile --- */
-    .icon-xl {
-        font-size: 2rem !important;
-    }
-
-    .icon-hero {
-        font-size: 4rem !important;
-    }
-
-    /* --- Gallery card photo border reduction --- */
-    .gallery-card {
-        border-width: 4px;
-    }
-
-    /* --- GENERAL 2-COLUMN GRID FORCED --- */
-    .grid-2,
-    .grid-3,
-    .md-grid-cols-2 /* For Voor Wie boxes */
-    {
-        display: grid !important;
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 0.75rem !important;
-    }
-
-    /* --- Aanbod - Typography Hierarchy --- */
-    /* Bold Title > Non-bold subtext */
-    .grid-2 h3, 
-    .card-base h3,
-    .card h3, 
-    .text-subheading {
-        font-weight: 700 !important;
-        font-size: 1.15rem !important;
-        margin-bottom: 0.25rem;
-    }
-
-    .grid-2 p,
-    .card-base p,
-    .card p,
-    .text-body {
-        font-weight: 400 !important;
-        font-size: 0.9rem !important;
-        opacity: 0.9;
-    }
-
-    /* --- Voor Wie Adjustments --- */
-    /* Stack icon and text inside the small tile */
-    .md-grid-cols-2 .card-base {
-        flex-direction: column !important; 
-        align-items: flex-start !important;
-        padding: 1rem !important;
-        text-align: left;
-        gap: 0.5rem !important;
-    }
-
-    /* Hide Werkwijze description text, keep title */
-    #mijn-werkwijze .card-base p.text-lead,
-    #mijn-werkwijze .card p.text-lead {
+    .accordion-header .accordion-toggle-text {
         display: none !important;
     }
-    
-    #mijn-werkwijze .card-base, #mijn-werkwijze .card {
-        min-height: auto !important;
-        padding: 1.5rem !important;
-    }
 
-    /* Fix potential sidebar overflow from reviews */
-    #reviews-container {
-        width: 100% !important;
-        grid-template-columns: 1fr !important;
+    .accordion-header .accordion-arrow {
         margin: 0 !important;
     }
 
-    /* --- Over Mij - Typography Consistency --- */
-    .intro-text p,
-    section p.text-lead,
-    section p {
-        font-size: 1rem !important;
-        line-height: 1.6 !important;
-        font-family: var(--font-sans) !important;
-        font-weight: 400 !important;
+    /* Werkwijze 2-column and title only on mobile */
+    #mijn-werkwijze .grid:last-child {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: var(--space-sm) !important;
     }
 
-    /* --- Reduce padding in cards --- */
-    .grid-2 .card-base, .grid-2 .card,
-    .grid-3 .card-base, .grid-3 .card,
-    .contact-grid .card-base
-    {
-        padding: 0.75rem !important;
+    #mijn-werkwijze .grid:last-child .card {
+        padding: var(--space-sm) !important;
+        text-align: center !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        min-height: 120px !important;
     }
 
-    /* --- Icon scaling for small cards --- */
-    .grid-2 .material-symbols-rounded, 
-    .contact-grid .material-symbols-rounded,
-    .md-grid-cols-2 .material-symbols-rounded 
-    {
-        font-size: 2rem !important;
-        margin-bottom: 0.5rem !important;
+    #mijn-werkwijze .grid:last-child .card p {
+        display: none !important;
     }
 
-    /* --- Button sizes in grids --- */
-    .grid-2 .button, .contact-grid .button {
-        width: 100% !important;
-        padding: 0.5rem !important;
-        font-size: 0.8rem !important;
-        min-width: 0 !important;
+    #mijn-werkwijze .grid:last-child .card h3 {
+        font-size: 0.9rem !important;
+        margin-bottom: 0 !important;
+    }
+
+    #mijn-werkwijze .grid:last-child .card .material-symbols-rounded {
+        margin-bottom: var(--space-xs) !important;
     }
 }
 
+@media (min-width: 640px) {
+    .footer-container {
+        gap: var(--space-lg);
+    }
+}
 
-/* Extra small screens (< 375px, e.g. iPhone SE) */
+@media (min-width: 768px) {
+    .footer-container {
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: var(--space-2xl);
+    }
+    
+    .footer-container > :first-child {
+        grid-column: auto;
+        text-align: left;
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+}
+
+.footer-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.footer-column h4 {
+    margin-bottom: var(--space-md);
+    font-size: var(--font-size-subheading);
+    color: var(--color-light-blue);
+}
+
+.footer-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--font-size-body);
+    opacity: 0.7;
+    font-weight: 600;
+    transition: opacity var(--transition-speed) ease, color var(--transition-speed) ease;
+}
+
+.footer-link:hover {
+    color: var(--color-light-blue);
+    opacity: 1;
+}
+
+.footer-bottom {
+    max-width: var(--content-max-width);
+    margin: var(--space-2xl) auto 0;
+    padding-top: var(--space-lg);
+    border-top: 1px solid rgba(246, 230, 200, 0.08);
+    text-align: center;
+    font-size: var(--font-size-small);
+    opacity: 0.3;
+}
+
+/* Extra small screen adjustments (320px - 374px) */
 @media (max-width: 374px) {
     :root {
         --page-gutter: 1rem;
-        --box-padding: 1.25rem;
-    }
-
-    .text-heading {
-        font-size: 1.5rem !important;
-    }
-
-    .button {
-        padding: 0.7rem 1rem;
-        font-size: 0.9rem;
-        min-width: auto;
     }
 }
