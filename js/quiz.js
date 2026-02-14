@@ -47,17 +47,17 @@ document.addEventListener('DOMContentLoaded', () => {
         start: {
             name: 'Startgroep',
             explanation: 'Je werkt aan de basis van functioneren in het Spaans: begrijpen, reageren en meedoen aan eenvoudige communicatie.',
-            link: 'groepslessen.html#niveau-start'
+            link: 'groepslessen#niveau-start'
         },
         startIntermediate: {
             name: 'Startgroep of vervolggroep',
             explanation: 'Je kunt al meedoen, maar hebt baat bij verdere opbouw en begeleiding. Twijfel je tussen start en verder? Dan is de startgroep vaak de beste keuze.',
-            link: 'groepslessen.html#niveau-verder'
+            link: 'groepslessen#niveau-verder'
         },
         intermediate: {
             name: 'Vervolggroep of privéles',
             explanation: 'Je communiceert al redelijk zelfstandig en wilt meer variatie, tempo en verdieping.',
-            link: 'groepslessen.html#niveau-verdieping'
+            link: 'groepslessen#niveau-verdieping'
         }
     };
 
