@@ -50,12 +50,12 @@ document.addEventListener('DOMContentLoaded', () => {
             link: 'groepslessen#niveau-start'
         },
         startIntermediate: {
-            name: 'Startgroep of vervolggroep',
+            name: 'Startgroep of verder',
             explanation: 'Je kunt al meedoen, maar hebt baat bij verdere opbouw en begeleiding. Twijfel je tussen start en verder? Dan is de startgroep vaak de beste keuze.',
             link: 'groepslessen#niveau-verder'
         },
         intermediate: {
-            name: 'Vervolggroep of privéles',
+            name: 'verdieping of privéles',
             explanation: 'Je communiceert al redelijk zelfstandig en wilt meer variatie, tempo en verdieping.',
             link: 'groepslessen#niveau-verdieping'
         }
