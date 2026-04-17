@@ -2771,3 +2771,60 @@ body.quiz-page+footer {
         --page-gutter: 1rem;
     }
 }
+
+
+/* --- COOKIE BANNER --- */
+.cookie-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(11, 95, 88, 0.95); /* Semi-transparent var(--color-dark-emerald) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--page-gutter);
+    z-index: 99999; /* Make sure it's above everything */
+    transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+}
+.cookie-banner.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+.cookie-banner .cookie-content {
+    background-color: var(--color-soft-cream);
+    color: var(--color-deep-navy);
+    padding: var(--space-xl);
+    border-radius: 12px;
+    max-width: 500px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+.cookie-banner p {
+    margin: 0;
+    font-size: var(--font-size-base, 1rem);
+    line-height: var(--line-height-relaxed);
+}
+.cookie-banner .cookie-buttons {
+    display: flex;
+    gap: var(--space-md);
+    justify-content: center;
+    margin-top: var(--space-sm);
+    flex-direction: column;
+}
+@media (min-width: 480px) {
+    .cookie-banner .cookie-buttons {
+        flex-direction: row;
+    }
+}
+.cookie-banner .btn {
+    padding: 0.75rem 1.5rem;
+    font-size: var(--font-size-base, 1rem);
+    font-weight: 600;
+    flex: 1; /* Make buttons even width if in row */
+}
