@@ -2776,55 +2776,48 @@ body.quiz-page+footer {
 /* --- COOKIE BANNER --- */
 .cookie-banner {
     position: fixed;
-    top: 0;
+    bottom: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(11, 95, 88, 0.95); /* Semi-transparent var(--color-dark-emerald) */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: var(--page-gutter);
-    z-index: 99999; /* Make sure it's above everything */
-    transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+    width: 100%;
+    background-color: var(--color-emerald);
+    color: var(--color-cream);
+    padding: var(--space-md) var(--page-gutter);
+    z-index: 9999;
+    box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
 }
 .cookie-banner.hidden {
+    transform: translateY(100%);
     opacity: 0;
-    visibility: hidden;
 }
 .cookie-banner .cookie-content {
-    background-color: var(--color-soft-cream);
-    color: var(--color-deep-navy);
-    padding: var(--space-xl);
-    border-radius: 12px;
-    max-width: 500px;
-    width: 100%;
+    max-width: var(--content-max-width);
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: var(--space-md);
+    gap: var(--space-sm);
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+@media (min-width: 768px) {
+    .cookie-banner .cookie-content {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        text-align: left;
+    }
 }
 .cookie-banner p {
     margin: 0;
-    font-size: var(--font-size-base, 1rem);
+    font-size: var(--font-size-small);
     line-height: var(--line-height-relaxed);
 }
 .cookie-banner .cookie-buttons {
     display: flex;
-    gap: var(--space-md);
+    gap: var(--space-sm);
     justify-content: center;
-    margin-top: var(--space-sm);
-    flex-direction: column;
-}
-@media (min-width: 480px) {
-    .cookie-banner .cookie-buttons {
-        flex-direction: row;
-    }
 }
 .cookie-banner .btn {
-    padding: 0.75rem 1.5rem;
-    font-size: var(--font-size-base, 1rem);
-    font-weight: 600;
-    flex: 1; /* Make buttons even width if in row */
+    padding: 0.5rem 1rem;
+    font-size: var(--font-size-small);
+
 }

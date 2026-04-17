@@ -1,0 +1,212 @@
+/* css/cookie-consent.css */
+/* Zorg ervoor dat dit in de stijl van de website past (Montserrat, Dark Emerald, Soft Cream etc.) */
+
+.cookie-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(14, 26, 43, 0.7); /* Deep Navy overlay */
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+}
+
+.cookie-preferences {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(14, 26, 43, 0.8); /* Deep Navy overlag */
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.cookie-banner .cookie-content {
+    background-color: #F6E6C8; /* Soft Cream */
+    color: #0E1A2B; /* Deep Navy */
+    width: 60%;
+    max-width: 800px;
+    min-width: 320px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    padding: 3rem;
+    border-radius: 12px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cookie-preferences .cookie-content {
+    background-color: #0B5F58; /* Dark Emerald */
+    color: #F6E6C8; /* Soft Cream */
+    max-width: 600px;
+    width: 100%;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+/* Voor de cookie banner light theme (Soft Cream BG) */
+.cookie-banner h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-weight: 600; /* SemiBold */
+    color: #0B5F58; /* Dark Emerald accent */
+    font-size: 1.8rem;
+    white-space: nowrap; /* Keep the title on one line */
+    font-family: 'Montserrat', sans-serif;
+}
+
+.cookie-banner p {
+    font-weight: 400; /* Regular */
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Voor de preferences dark theme (Dark Emerald BG) */
+.cookie-preferences h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-weight: 600; /* SemiBold */
+    color: #CFE4EA; /* Light Blue accent */
+    font-size: 1.5rem;
+}
+
+.cookie-preferences p {
+    font-weight: 400; /* Regular */
+    line-height: 1.4;
+    margin-bottom: 1.5rem;
+}
+
+.cookie-content {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.cookie-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: auto; /* Push buttons to the bottom */
+}
+
+/* Button general styling */
+.cookie-buttons .btn {
+    padding: 0.85rem 1.8rem;
+    font-size: 1.05rem;
+    font-weight: 600; /* SemiBold */
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    transition: all 0.2s ease-in-out;
+    border: 2px solid transparent;
+    text-align: center;
+}
+
+/* Primary Button (Dark inside banner, Light inside preferences) */
+.cookie-banner .btn-primary {
+    background-color: #0B5F58; /* Dark Emerald */
+    color: #F6E6C8; /* Soft Cream */
+    border-color: #0B5F58;
+}
+
+.cookie-banner .btn-primary:hover {
+    background-color: #0E1A2B; /* Deep Navy hover */
+    border-color: #0E1A2B;
+}
+
+.cookie-banner .btn-outline {
+    background-color: transparent;
+    color: #0B5F58;
+    border-color: #0B5F58;
+}
+
+.cookie-banner .btn-outline:hover {
+    background-color: #0B5F58;
+    color: #F6E6C8;
+}
+
+.cookie-preferences .btn-primary {
+    background-color: #CFE4EA; /* Light Blue */
+    color: #0E1A2B; /* Deep Navy */
+}
+
+.cookie-preferences .btn-primary:hover {
+    background-color: #F6E6C8; /* Soft Cream hover */
+}
+
+.cookie-category {
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(246, 230, 200, 0.2);
+    padding-bottom: 1rem;
+}
+
+.cookie-category:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.category-header {
+    margin-bottom: 0.5rem;
+}
+
+.category-header label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 600; /* SemiBold */
+    font-size: 1.1rem;
+    color: #CFE4EA; /* Light Blue */
+}
+
+.category-header input[type="checkbox"] {
+    width: 1.25rem;
+    height: 1.25rem;
+    cursor: pointer;
+    accent-color: #CFE4EA; /* Light Blue checkbox */
+}
+
+.category-desc {
+    font-size: 0.9rem !important;
+    margin-bottom: 0 !important;
+    color: #F6E6C8; /* Soft Cream */
+    padding-left: 2rem;
+}
+
+@media (max-width: 600px) {
+    .cookie-banner h3 {
+        white-space: normal; /* allow wrapping on very small screens so it doesnt break layout */
+        font-size: 1.5rem;
+    }
+
+    .cookie-banner .cookie-content {
+        width: 90%;
+        padding: 1.5rem;
+    }
+
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .cookie-buttons .btn {
+        width: 100%;
+    }
+}

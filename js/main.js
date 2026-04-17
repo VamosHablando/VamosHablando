@@ -157,13 +157,9 @@ document.addEventListener('DOMContentLoaded', () => {
 function initCookieBanner() {
     if (localStorage.getItem('cookieAccepted')) return;
 
-    // Block scrolling while banner is active
-    document.body.style.overflow = 'hidden';
-
-    // Add overlay to banner
     const bannerHTML = `<div id="cookie-banner" class="cookie-banner">
         <div class="cookie-content">
-            <p><strong>Welkom bij Vamos Hablando!</strong><br><br>Voordat u verder gaat, willen wij u laten weten dat wij cookies gebruiken om uw gebruikerservaring te verbeteren en webverkeer te analyseren.</p>
+            <p>Wij gebruiken cookies om uw gebruikerservaring te verbeteren en webverkeer te analyseren.</p>
             <div class="cookie-buttons">
                 <button id="accept-cookies" class="btn btn-primary">Accepteren</button>
                 <button id="reject-cookies" class="btn btn-secondary">Weigeren</button>
@@ -174,15 +170,17 @@ function initCookieBanner() {
     document.body.insertAdjacentHTML('beforeend', bannerHTML);
 
     const banner = document.getElementById('cookie-banner');
-    document.getElementById('accept-cookies').addEventListener('click', () => { 
+    document.getElementById('accept-cookies').addEventListener('click', () => {
         localStorage.setItem('cookieAccepted', 'true');
         banner.classList.add('hidden');
-        document.body.style.overflow = '';
         setTimeout(() => banner.remove(), 300);
     });
 
-    document.getElementById('reject-cookies').addEventListener('click', () => { 
+    document.getElementById('reject-cookies').addEventListener('click', () => {
         localStorage.setItem('cookieAccepted', 'false');
         banner.classList.add('hidden');
-        document.body.style.overflow = '';
+        setTimeout(() => banner.remove(), 300);
+    });
+}
+
 document.addEventListener('DOMContentLoaded', initCookieBanner);
