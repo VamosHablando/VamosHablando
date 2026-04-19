@@ -152,35 +152,3 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-
-/* --- COOKIE BANNER --- */
-function initCookieBanner() {
-    if (localStorage.getItem('cookieAccepted')) return;
-
-    const bannerHTML = `<div id="cookie-banner" class="cookie-banner">
-        <div class="cookie-content">
-            <p>Wij gebruiken cookies om uw gebruikerservaring te verbeteren en webverkeer te analyseren.</p>
-            <div class="cookie-buttons">
-                <button id="accept-cookies" class="btn btn-primary">Accepteren</button>
-                <button id="reject-cookies" class="btn btn-secondary">Weigeren</button>
-            </div>
-        </div>
-    </div>`;
-
-    document.body.insertAdjacentHTML('beforeend', bannerHTML);
-
-    const banner = document.getElementById('cookie-banner');
-    document.getElementById('accept-cookies').addEventListener('click', () => {
-        localStorage.setItem('cookieAccepted', 'true');
-        banner.classList.add('hidden');
-        setTimeout(() => banner.remove(), 300);
-    });
-
-    document.getElementById('reject-cookies').addEventListener('click', () => {
-        localStorage.setItem('cookieAccepted', 'false');
-        banner.classList.add('hidden');
-        setTimeout(() => banner.remove(), 300);
-    });
-}
-
-document.addEventListener('DOMContentLoaded', initCookieBanner);
